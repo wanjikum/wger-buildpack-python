@@ -8,6 +8,7 @@ find .heroku/python/lib/python*/site-packages/ -name "*.pth" -print0 2> /dev/nul
 set -e
 
 find .heroku/python/lib/python*/site-packages/ -name "*.egg-link" -print0 2> /dev/null | cat
+find .heroku/python/lib/python*/site-packages/ -name "*.pth" -print0 2> /dev/null | cat
 cat .heroku/python/lib/python3.6/site-packages/requests.egg-link
 echo "***"
 
