@@ -11,7 +11,7 @@ set -e
 find .heroku/python/lib/python*/site-packages/ -name "*.egg-link" 2> /dev/null | cat
 find .heroku/python/lib/python*/site-packages/ -name "*.pth" 2> /dev/null | cat
 echo '****'
-cat .heroku/python/lib/python2.7/site-packages/setuptools.pth
+cat .heroku/python/lib/python2.7/site-packages/easy-install.pth
 echo "***"
 
 set +e
