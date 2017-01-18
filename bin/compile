@@ -197,6 +197,14 @@ source $BIN_DIR/steps/pip-install
 rm -fr $BUILD_DIR/.heroku/src
 deep-cp /app/.heroku/src $BUILD_DIR/.heroku/src
 
+#add bower etc
+invoke --version
+
+echo "staring bower"
+invoke create_settings  --settings-path ./settings.py --database-path ./database.sqlite
+invoke bootstrap_wger --settings-path ./settings.py --no-start-server
+echo "done"
+
 # Django collectstatic support.
 sub-env $BIN_DIR/steps/collectstatic
 
