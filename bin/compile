@@ -202,7 +202,7 @@ invoke --version
 
 echo "staring bower"
 python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke create_settings  --settings-path ./settings.py --database-path ./database.sqlite 
-python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke bootstrap_wger --settings-path ./settings.py --no-start-server > dev/null
+python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke bootstrap_wger --settings-path ./settings.py --no-start-server 
 echo "done"
 
 # Django collectstatic support.
