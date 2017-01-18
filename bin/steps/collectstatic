@@ -25,7 +25,7 @@ pip-grep -s requirements.txt django Django && DJANGO_INSTALLED=1
 bpwatch start collectstatic  # metrics collection
 
 invoke create_settings  --settings-path ./settings.py --database-path ./database.sqlite
-invoke bootstrap_wger --settings-path /home/wger/wger/settings.py --no-start-server
+invoke bootstrap_wger --settings-path ./settings.py --no-start-server
 
 if [ ! "$DISABLE_COLLECTSTATIC" ] && [ -f "$MANAGE_FILE" ] && [ "$DJANGO_INSTALLED" ]; then
     set +e
