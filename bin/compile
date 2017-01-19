@@ -200,8 +200,10 @@ deep-cp /app/.heroku/src $BUILD_DIR/.heroku/src
 #add bower etc
 invoke --version
 
+echo " i am using $DB"
+
 echo "staring bower"
-python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke create_settings  --settings-path ./settings.py --database-type $DB
+python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke create_settings  --settings-path ./settings.py --database-type postgresql
 python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke bootstrap_wger --settings-path ./settings.py --no-start-server
 echo "done"
 
