@@ -198,6 +198,7 @@ rm -fr $BUILD_DIR/.heroku/src
 deep-cp /app/.heroku/src $BUILD_DIR/.heroku/src
 
 #add bower etc
+env
 invoke --version
 
 echo "staring bower"
