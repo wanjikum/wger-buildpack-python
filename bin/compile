@@ -37,6 +37,21 @@ PYTHON_EXE="/app/.heroku/python/bin/python"
 PIP_VERSION="9.0.1"
 SETUPTOOLS_VERSION="32.1.0"
 
+
+# export enviroment variables
+export_env_dir() {
+  env_dir=$ENV_DIR
+  whitelist_regex=${2:-''}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+  if [ -d "$env_dir" ]; then
+    for e in $(ls $env_dir); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $env_dir/$e)"
+      :
+    done
+  fi
+}
+export_env_dir
 # Common Problem Warnings
 export WARNINGS_LOG=$(mktemp)
 export RECOMMENDED_PYTHON_VERSION=$DEFAULT_PYTHON_VERSION
@@ -201,8 +216,8 @@ deep-cp /app/.heroku/src $BUILD_DIR/.heroku/src
 invoke --version
 
 echo "staring bower"
-python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke create_settings  --settings-path ./settings.py --database-path ./database.sqlite 
-python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke bootstrap_wger --settings-path ./settings.py --no-start-server 
+python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke create_settings  --settings-path wger/settings.py --database-path $DATABASE_PATH --database-type postgresql 
+python -c 'import pty, sys; pty.spawn(sys.argv[1:])' | invoke bootstrap_wger --settings-path wger/settings.py --no-start-server 
 echo "done"
 
 # Django collectstatic support.
